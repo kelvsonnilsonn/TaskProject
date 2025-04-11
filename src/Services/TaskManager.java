@@ -23,13 +23,28 @@ public class TaskManager implements Manager {
     @Override
     public void createTask(String taskName, String body){  // criar task
 
-        String formatedData = dataService.format(dataService.getTimeNow()); // formata a data
-
-        taskList.add(new Task(taskName, body, formatedData, false)); // cria a task
+        if(findTaskByName(taskName) != null){
+            throw new IllegalArgumentException("Tarefa '" + taskName + "' já existe.");
+        } else {
+            String formatedData = dataService.format(dataService.getTimeNow()); // formata a data
+            Task task = new Task(taskName, body, formatedData, false); // cria a task
+            taskList.add(task); // adiciona a task à lista
+            logger.createdTaskLog(task); // log
+        }
     }
 
     @Override
     public void deleteTask(String taskName){
         ;
+    }
+
+
+
+
+    private Task findTaskByName(String name){
+        for(Task task : taskList){
+            if(task.getName().equals(name)) return task;
+        }
+        return null;
     }
 }
