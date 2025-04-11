@@ -17,7 +17,8 @@ public class DataTimeService implements DataTime {
         DateFormat dayFormatter = DateFormat.getDateInstance();
         DateFormat timeFormatter = DateFormat.getTimeInstance();
 
-        return String.format("DATA: %s\nHORÁRIO: %s", dayFormatter, timeFormatter);
+        return String.format("DATA: %s - HORÁRIO: %s",
+                dayFormatter.format(data), timeFormatter.format(data));
     }
 
 }

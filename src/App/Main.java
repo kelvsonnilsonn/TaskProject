@@ -1,28 +1,23 @@
 package App;
 
-import java.util.Calendar;
-import java.text.DateFormat;
-import java.util.Date;
+import Interfaces.*;
+import Services.TaskManager;
+import Util.DataTimeService;
+import Util.TaskLogger;
 
 public class Main{
 
     public static void main(String[] args) {
-        Calendar c = Calendar.getInstance();
-        Date data = c.getTime();
-        System.out.println("Data atual sem formatação: "+data);
+        DataTime data = new DataTimeService();
+        Logger logger = new TaskLogger();
+        Manager taskManager = new TaskManager(data, logger);
 
-        //Formata a data
-        DateFormat formataData = DateFormat.getDateInstance();
-        System.out.println("Data atual com formatação: "+ formataData.format(data));
+        taskManager.createTask("Testando", "Tem que testar");
+        taskManager.createTask("Testando2", "Tem que testar1");
+        taskManager.createTask("Testando3", "Tem que testar2");
 
-        //Formata Hora
-        DateFormat hora = DateFormat.getTimeInstance();
-        System.out.println("Hora formatada: "+hora.format(data));
-
-        //Formata Data e Hora
-        DateFormat dtHora = DateFormat.getDateTimeInstance();
-        System.out.println(dtHora.format(data));
-
+        taskManager.deleteTask("Testando2");
+        taskManager.createTask("Testando2", "Tem que testar1");
+        taskManager.createTask("Testando5", "Tem que testar1");
     }
-
 }

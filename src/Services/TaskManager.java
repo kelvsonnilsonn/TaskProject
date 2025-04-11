@@ -34,17 +34,20 @@ public class TaskManager implements Manager {
     }
 
     @Override
-    public void deleteTask(String taskName){
-        ;
+    public void deleteTask(String taskName) {
+        Task taskFound = taskList.stream()
+                .filter(task -> task.getName().equals(taskName))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada."));
+
+        taskList.remove(taskFound);
+        logger.deletedTaskLog(taskFound);
     }
 
-
-
-
     private Task findTaskByName(String name){
-        for(Task task : taskList){
-            if(task.getName().equals(name)) return task;
-        }
-        return null;
+        return taskList.stream()
+                .filter(task -> task.getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 }
