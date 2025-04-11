@@ -3,9 +3,9 @@ package model;
 import java.util.Date;
 
 public class Task {
-    private String taskName;
-    private String value;
-    private String data;
+    private final String taskName;
+    private final String value;
+    private final String data;
     private boolean status;
 
     public Task(String name, String value, String date, boolean status){
@@ -23,18 +23,12 @@ public class Task {
     public void setStatus(boolean new_Status){ this.status = new_Status; }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Tarefa: ");
-        sb.append(getName());
-        sb.append("Objetivo: ");
-        sb.append(getValue());
-        sb.append("Data: ");
-        sb.append(getDate());
-        sb.append("Status: ");
-        sb.append(getStatus());
-
+        sb.append("Tarefa: ").append(getName()).append("\n");
+        sb.append("Objetivo: ").append(getValue()).append("\n");
+        sb.append("Data: ").append(getDate()).append("\n");
+        sb.append("Status: ").append(getStatus() ? "Concluída" : "Pendente"); // Melhor que "true/false"
         return sb.toString();
-
     }
 }
