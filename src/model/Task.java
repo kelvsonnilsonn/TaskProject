@@ -5,10 +5,10 @@ import java.util.Date;
 public class Task {
     private String taskName;
     private String value;
-    private Date data;
+    private String data;
     private boolean status;
 
-    public Task(String name, String value, Date date, boolean status){
+    public Task(String name, String value, String date, boolean status){
         this.taskName = name;
         this.value = value;
         this.data = date;
@@ -17,7 +17,7 @@ public class Task {
 
     public String getName() { return this.taskName; }
     public String getValue() { return this.value; }
-    public Date getDate() { return this.data; }
+    public String getDate() { return this.data; }
     public boolean getStatus() { return this.status; }
 
     public void setStatus(boolean new_Status){ this.status = new_Status; }
