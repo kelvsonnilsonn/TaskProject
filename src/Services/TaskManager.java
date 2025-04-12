@@ -3,6 +3,7 @@ package Services;
 import Interfaces.DataTime;
 import Interfaces.Logger;
 import Interfaces.Manager;
+import Interfaces.Validate;
 import model.Priority;
 import model.Task;
 
@@ -17,17 +18,22 @@ public class TaskManager implements Manager {
 
     private final DataTime dataService;
     private final Logger logger;
+    private final Validate validate;
 
-    public TaskManager(DataTime dataService, Logger logger){
+    public TaskManager(DataTime dataService, Logger logger, Validate validate){
         this.dataService = dataService;
         this.logger = logger;
+        this.validate = validate;
     }
 
     @Override
     public void createTask(String taskName, String body, Priority priority, String tag){  // criar task
 
+        taskName = validate.requireNonEmpty(taskName, "CREATE TASK - NAME");
+        body = validate.requireNonEmpty(body, "CREATE TASK - BODY");
+
         if(findTaskByName(taskName) != null){
-            throw new IllegalArgumentException("Tarefa '" + taskName + "' já existe.");
+            throw new IllegalArgumentException("[CREATE TASK - ERROR] Tarefa '" + taskName + "' já existe.");
         } else {
             String formatedData = dataService.format(dataService.getTimeNow()); // formata a data
 
@@ -44,20 +50,27 @@ public class TaskManager implements Manager {
 
     @Override
     public void deleteTask(String taskName) {
-        Task taskFound = taskList.stream()
-                .filter(task -> task.getName().equals(taskName))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada."));
-        taskList.remove(taskFound);
 
+        taskName = validate.requireNonEmpty(taskName, "DELETE TASK - NAME");
+
+        Task taskToRemove = findTaskByName(taskName);
+        if(taskToRemove == null){
+            throw new IllegalArgumentException("[DELETE TASK - ERROR] Tarefa não encontrada.");
+        } else {
+            taskList.remove(taskToRemove);
+        }
     }
 
     @Override
-    public void addTagToTask(String task, String newTag){
-        if(findTaskByName(task) == null){
-            throw new IllegalArgumentException("Tarefa inexistente.");
+    public void addTagToTask(String taskName, String newTag){
+
+        taskName = validate.requireNonEmpty(taskName, "TAG - NAME");
+        newTag = validate.requireNonEmpty(newTag, "TAG - TAG");
+
+        Task alteredTaskTag = findTaskByName(taskName);
+        if(alteredTaskTag == null){
+            throw new IllegalArgumentException("[TAG - ERROR] Tarefa não encontrada.");
         } else {
-            Task alteredTaskTag = findTaskByName(task);
             taskList.remove(alteredTaskTag);
             alteredTaskTag.addTaskTag(newTag);
             taskList.add(alteredTaskTag);
