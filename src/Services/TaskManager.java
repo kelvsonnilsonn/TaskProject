@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class TaskManager implements Manager {
 
     private final List<Task> taskList = new ArrayList<>();
+    private final List<Task> completedTasks = new ArrayList<>();
 
     private final DataTime dataService;
     private final Logger logger;
@@ -25,6 +26,22 @@ public class TaskManager implements Manager {
         this.dataService = dataService;
         this.logger = logger;
         this.validate = validate;
+    }
+
+    @Override
+    public void completeTask(String taskName){
+        taskName = validate.requireNonEmpty(taskName, "COMPLETE TASK - NAME");
+
+        Task completedTask = findTaskByName(taskName);
+        if(completedTask == null){
+            throw new IllegalArgumentException("Tarefa não encontrada.");
+        } else {
+            completedTask.setStatus(!completedTask.isOverDue() ? "Feita." : "Feita com atraso.");
+            taskList.remove(completedTask);
+            completedTasks.add(completedTask);
+
+            completedTasks.forEach(System.out::println);
+        }
     }
 
     @Override
@@ -41,9 +58,9 @@ public class TaskManager implements Manager {
         } else {
             Task task = new Task(taskName,
                     body,
-                    false,
                     priority);
 
+            task.setStatus("Pendente");
             task.addTaskTag(tag);
             task.setDeadLine(validatedDeadline);
 

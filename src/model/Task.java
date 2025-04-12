@@ -15,14 +15,13 @@ public class Task {
     private LocalDate deadline;
     private List<String> tag;
     private Priority priority;
-    private boolean status;
+    private String status;
 
 
-    public Task(String name, String value, boolean status, Priority priority){
+    public Task(String name, String value, Priority priority){
         this.taskName = name;
         this.priority = priority;
         this.value = value;
-        this.status = status;
 
         this.tag = new ArrayList<>();
     }
@@ -33,15 +32,15 @@ public class Task {
     public String getDeadlineFormatted() {
         return deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
+    public String getStatus() { return this.status; }
 
-    public boolean getStatus() { return this.status; }
     public boolean isOverDue() { return LocalDate.now().isAfter(deadline); } // checa se data atrasou!
 
     public Priority getPriority() { return this.priority; }
 
     public void addTaskTag(String tagToAdd) { this.tag.add(tagToAdd); }
     public void setDeadLine(LocalDate deadline) { this.deadline = deadline; }
-    public void setStatus(boolean new_Status) { this.status = new_Status; }
+    public void setStatus(String new_Status) { this.status = new_Status; }
     public void setPriority(Priority new_priority) { this.priority = new_priority; }
 
     @Override
@@ -52,7 +51,7 @@ public class Task {
         sb.append("Prioridade: ").append(getPriority()).append("\n");
         sb.append("Objetivo: ").append(getValue()).append("\n");
         sb.append("Data: ").append(getDeadlineFormatted()).append("\n");
-        sb.append("Status: ").append(getStatus() ? "Concluída\n" : "Pendente\n");
+        sb.append("Status: ").append(getStatus()).append("\n");
         sb.append("Tag: ").append(getTag()).append("\n");
         // Melhor que "true/false"
         return sb.toString();

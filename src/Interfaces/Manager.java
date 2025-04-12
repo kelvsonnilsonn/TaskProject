@@ -11,6 +11,8 @@ public interface Manager {
                     Priority priority, String tag,
                     int day, int month, int year);
 
+    public void completeTask(String taskName);
+
     void deleteTask(String taskName);
 
     List<Task> getAllTasks();

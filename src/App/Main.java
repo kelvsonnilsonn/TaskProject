@@ -26,8 +26,10 @@ public class Main{
                 "Tem que testar",
                 Priority.ALTO,
                 "Trabalho",
-                12, 5, 2022);
+                12, 9, 2025);
 
         printer.printTasks(taskManager.getAllTasks());
+
+        taskManager.completeTask("Testando");
     }
 }
