@@ -19,6 +19,7 @@ public class Main{
         Logger logger = new TaskLogger();
         Validate validate = new ValidadeUtils();
         Manager taskManager = new TaskManager(data, logger, validate);
+
         TaskPrinter printer = new TaskPrinter();
 
         taskManager.createTask("Testando",
