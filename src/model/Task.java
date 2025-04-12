@@ -1,37 +1,46 @@
 package model;
 
+import Interfaces.DataTime;
+import Util.DataTimeService;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
+
 
 public class Task {
     private final String taskName;
     private final String value;
-    private final String data;
+    private LocalDate deadline;
     private List<String> tag;
     private Priority priority;
     private boolean status;
 
 
-    public Task(String name, String value, String date, boolean status, Priority priority){
+    public Task(String name, String value, boolean status, Priority priority){
         this.taskName = name;
         this.priority = priority;
         this.value = value;
-        this.data = date;
         this.status = status;
+
         this.tag = new ArrayList<>();
     }
 
     public String getName() { return this.taskName; }
     public String getValue() { return this.value; }
-    public String getDate() { return this.data; }
     public List<String> getTag() { return this.tag; }
+    public String getDeadlineFormatted() {
+        return deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
 
     public boolean getStatus() { return this.status; }
+    public boolean isOverDue() { return LocalDate.now().isAfter(deadline); } // checa se data atrasou!
 
     public Priority getPriority() { return this.priority; }
 
     public void addTaskTag(String tagToAdd) { this.tag.add(tagToAdd); }
+    public void setDeadLine(LocalDate deadline) { this.deadline = deadline; }
     public void setStatus(boolean new_Status) { this.status = new_Status; }
     public void setPriority(Priority new_priority) { this.priority = new_priority; }
 
@@ -42,7 +51,7 @@ public class Task {
         sb.append("Tarefa: ").append(getName()).append("\n");
         sb.append("Prioridade: ").append(getPriority()).append("\n");
         sb.append("Objetivo: ").append(getValue()).append("\n");
-        sb.append("Data: ").append(getDate()).append("\n");
+        sb.append("Data: ").append(getDeadlineFormatted()).append("\n");
         sb.append("Status: ").append(getStatus() ? "Concluída\n" : "Pendente\n");
         sb.append("Tag: ").append(getTag()).append("\n");
         // Melhor que "true/false"

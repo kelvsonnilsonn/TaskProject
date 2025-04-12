@@ -21,14 +21,12 @@ public class Main{
         Manager taskManager = new TaskManager(data, logger, validate);
         TaskPrinter printer = new TaskPrinter();
 
-        taskManager.createTask("Testando", "Tem que testar", Priority.ALTO, "Trabalho");
-        taskManager.createTask("Testando2", "Tem que testar1", Priority.ALTO, "Escola");
-        taskManager.createTask("null", "null", Priority.ALTO, "Trabalho");
+        taskManager.createTask("Testando",
+                "Tem que testar",
+                Priority.ALTO,
+                "Trabalho",
+                12, 5, 2022);
 
-        taskManager.deleteTask("Testando2");
-        taskManager.createTask("Testando2", "Tem que testar1", Priority.BAIXO, "Escola");
-
-        printer.printTasks(taskManager.getTasksFilteredByPriority(Priority.ALTO));
-        taskManager.addTagToTask("null", "null");
+        printer.printTasks(taskManager.getAllTasks());
     }
 }

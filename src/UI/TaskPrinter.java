@@ -8,11 +8,9 @@ import java.util.List;
 public class TaskPrinter implements Printer {
     @Override
     public void printTasks(List<Task> taskList){
-        taskList.forEach(task -> System.out.printf(" - %s Prioridade: %s, Tag: %s\n",
-                task.getName(),
-                task.getPriority(),
-                task.getTag())
-        );
+        for(Task t : taskList){
+            System.out.println(t);
+        }
     }
 }
 

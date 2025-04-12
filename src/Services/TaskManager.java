@@ -7,6 +7,7 @@ import Interfaces.Validate;
 import model.Priority;
 import model.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -27,22 +28,25 @@ public class TaskManager implements Manager {
     }
 
     @Override
-    public void createTask(String taskName, String body, Priority priority, String tag){  // criar task
+    public void createTask(String taskName, String body,
+                           Priority priority, String tag,
+                           int day, int month, int year){  // criar task
 
         taskName = validate.requireNonEmpty(taskName, "CREATE TASK - NAME");
         body = validate.requireNonEmpty(body, "CREATE TASK - BODY");
+        LocalDate validatedDeadline = dataService.createValidDeadLine(day, month, year);
 
         if(findTaskByName(taskName) != null){
             throw new IllegalArgumentException("[CREATE TASK - ERROR] Tarefa '" + taskName + "' já existe.");
         } else {
-            String formatedData = dataService.format(dataService.getTimeNow()); // formata a data
-
             Task task = new Task(taskName,
                     body,
-                    formatedData,
                     false,
                     priority);
+
             task.addTaskTag(tag);
+            task.setDeadLine(validatedDeadline);
+
             taskList.add(task); // adiciona a task à lista
 
         }
