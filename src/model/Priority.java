@@ -1,9 +1,9 @@
 package model;
 
 public enum Priority {
-    BAIXO(1),
+    BAIXO(10),
     MEDIO(5),
-    ALTO(10);
+    ALTO(1);
 
     private final int value;
 

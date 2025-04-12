@@ -1,13 +1,17 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 public class Task {
     private final String taskName;
     private final String value;
     private final String data;
+    private List<String> tag;
     private Priority priority;
     private boolean status;
+
 
     public Task(String name, String value, String date, boolean status, Priority priority){
         this.taskName = name;
@@ -15,16 +19,19 @@ public class Task {
         this.value = value;
         this.data = date;
         this.status = status;
+        this.tag = new ArrayList<>();
     }
 
     public String getName() { return this.taskName; }
     public String getValue() { return this.value; }
     public String getDate() { return this.data; }
+    public List<String> getTag() { return this.tag; }
 
     public boolean getStatus() { return this.status; }
 
     public Priority getPriority() { return this.priority; }
 
+    public void addTaskTag(String tagToAdd) { this.tag.add(tagToAdd); }
     public void setStatus(boolean new_Status) { this.status = new_Status; }
     public void setPriority(Priority new_priority) { this.priority = new_priority; }
 
@@ -37,6 +44,7 @@ public class Task {
         sb.append("Objetivo: ").append(getValue()).append("\n");
         sb.append("Data: ").append(getDate()).append("\n");
         sb.append("Status: ").append(getStatus() ? "Concluída\n" : "Pendente\n");
+        sb.append("Tag: ").append(getTag()).append("\n");
         // Melhor que "true/false"
         return sb.toString();
     }
