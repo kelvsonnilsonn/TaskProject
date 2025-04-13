@@ -4,10 +4,12 @@ import Interfaces.DataTime;
 import Interfaces.Logger;
 import Interfaces.Manager;
 import Interfaces.Validate;
+
 import model.Priority;
 import model.Task;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -39,8 +41,7 @@ public class TaskManager implements Manager {
             completedTask.setStatus(!completedTask.isOverDue() ? "Feita." : "Feita com atraso.");
             taskList.remove(completedTask);
             completedTasks.add(completedTask);
-
-            completedTasks.forEach(System.out::println);
+            logger.completedTaskLog(completedTask);
         }
     }
 
@@ -65,6 +66,7 @@ public class TaskManager implements Manager {
             task.setDeadLine(validatedDeadline);
 
             taskList.add(task); // adiciona a task à lista
+            logger.createdTaskLog(task);
 
         }
     }
@@ -79,6 +81,7 @@ public class TaskManager implements Manager {
             throw new IllegalArgumentException("[DELETE TASK - ERROR] Tarefa não encontrada.");
         } else {
             taskList.remove(taskToRemove);
+            logger.deletedTaskLog(taskToRemove);
         }
     }
 

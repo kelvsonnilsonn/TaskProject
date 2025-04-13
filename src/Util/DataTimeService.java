@@ -3,23 +3,17 @@ package Util;
 import Interfaces.DataTime;
 
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.text.DateFormat;
 
 public class DataTimeService implements DataTime {
-    @Override
-    public Date getTimeNow(){
-        Calendar c = Calendar.getInstance();
-        return c.getTime();
-    }
-    @Override
-    public String format(Date data){
-        DateFormat dayFormatter = DateFormat.getDateInstance();
-        DateFormat timeFormatter = DateFormat.getTimeInstance();
 
-        return String.format("DATA: %s - HORÁRIO: %s",
-                dayFormatter.format(data), timeFormatter.format(data));
+    @Override
+    public String getTimeNow(){
+        LocalDateTime time = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return time.format(formatter);
     }
 
     @Override
