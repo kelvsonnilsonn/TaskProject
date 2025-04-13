@@ -9,7 +9,7 @@ import java.util.List;
 public interface Manager {
     void createTask(String taskName, String data,
                     Priority priority, String tag,
-                    int day, int month, int year);
+                    int day, int month, int year, String type);
     void completeTask(String taskName);
     void deleteTask(String taskName);
     void addTagToTask(String task, String newTag);

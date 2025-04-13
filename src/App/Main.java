@@ -10,8 +10,10 @@ import Util.*;
 
 import Util.FileUtils.FileLocations;
 import Util.FileUtils.FileUploader;
+
 import Util.LogUtils.NullLogger;
 import Util.LogUtils.TaskLogger;
+
 import model.Priority;
 
 import java.io.FileWriter;
@@ -23,10 +25,10 @@ public class Main{
 
         DataTime data = new DataTimeService();
         Validate validate = new ValidadeUtils();
-        FileUploader uploader = new FileUploader();
 
         Logger logger = createLogger(data);
         Manager taskManager = new TaskManager(data, logger, validate);
+        Uploader uploader = new FileUploader(taskManager);
 
         try{
 
@@ -37,8 +39,10 @@ public class Main{
                     "Tem que testar",
                     Priority.ALTO,
                     "Trabalho",
-                    12, 9, 2025);
+                    12, 9, 2025,
+                    "CREATE");
 
+            printer.printTasks(taskManager.getAllTasks());
         } finally {
             logger.close();
         }

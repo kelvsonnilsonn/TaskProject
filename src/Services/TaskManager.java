@@ -49,7 +49,7 @@ public class TaskManager implements Manager {
     @Override
     public void createTask(String taskName, String body,
                            Priority priority, String tag,
-                           int day, int month, int year){  // criar task
+                           int day, int month, int year, String type){  // criar task
 
         taskName = validate.requireNonEmpty(taskName, "CREATE TASK - NAME");
         body = validate.requireNonEmpty(body, "CREATE TASK - BODY");
@@ -67,8 +67,10 @@ public class TaskManager implements Manager {
             task.setDeadLine(validatedDeadline);
 
             taskList.add(task); // adiciona a task à lista
-            logger.createdTaskLog(task);
 
+            if(type.equals("CREATE")){
+                logger.createdTaskLog(task);
+            }
         }
     }
 

@@ -45,7 +45,8 @@ public class TaskLogger implements Logger {
     private String formattedMessageToLog(Task task, String time, String type){
         StringBuilder message = new StringBuilder();
 
-        message.append("[LOG : " + time + "] ").append(type + " | ")
+        message.append("[LOG : " + time + "] ").append(" | ")
+                .append(type).append(" | ")
                 .append("Task : " + task.getName()).append(" | ")
                 .append("Objetivo : " + task.getValue()).append(" | ")
                 .append("Prioridade : " + task.getPriority()).append(" | ")
