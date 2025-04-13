@@ -1,6 +1,5 @@
-package Util;
+package Util.LogUtils;
 
-import Interfaces.DataTime;
 import Interfaces.Logger;
 import model.Task;
 

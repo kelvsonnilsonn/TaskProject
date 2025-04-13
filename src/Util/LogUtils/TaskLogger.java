@@ -1,11 +1,9 @@
-package Util;
+package Util.LogUtils;
 
 import Interfaces.DataTime;
 import Interfaces.Logger;
 
-import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.Date;
 
 import model.Task;
 
@@ -47,9 +45,12 @@ public class TaskLogger implements Logger {
     private String formattedMessageToLog(Task task, String time, String type){
         StringBuilder message = new StringBuilder();
 
-        message.append("[LOG : " + time + "] ").append(type + " -> ")
+        message.append("[LOG : " + time + "] ").append(type + " | ")
                 .append("Task : " + task.getName()).append(" | ")
                 .append("Objetivo : " + task.getValue()).append(" | ")
+                .append("Prioridade : " + task.getPriority()).append(" | ")
+                .append("Tag : " + task.getTag()). append(" | ")
+                .append("Status : " + task.getStatus()).append(" | ")
                 .append("Prazo : " + task.getDeadlineFormatted());
 
         return message.toString();

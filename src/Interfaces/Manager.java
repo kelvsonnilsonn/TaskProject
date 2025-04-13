@@ -10,16 +10,13 @@ public interface Manager {
     void createTask(String taskName, String data,
                     Priority priority, String tag,
                     int day, int month, int year);
-
-    public void completeTask(String taskName);
-
+    void completeTask(String taskName);
     void deleteTask(String taskName);
+    void addTagToTask(String task, String newTag);
+    void uploadTaskFromData(List<Task> uploadedTask);
 
     List<Task> getAllTasks();
-
     List<Task> getAllTasksByTag(String tag);
-
-    void addTagToTask(String task, String newTag);
-
     List<Task> getTasksFilteredByPriority(Priority priority);
+
 }

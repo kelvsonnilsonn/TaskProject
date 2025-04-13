@@ -8,6 +8,10 @@ import UI.TaskPrinter;
 
 import Util.*;
 
+import Util.FileUtils.FileLocations;
+import Util.FileUtils.FileUploader;
+import Util.LogUtils.NullLogger;
+import Util.LogUtils.TaskLogger;
 import model.Priority;
 
 import java.io.FileWriter;
@@ -19,11 +23,14 @@ public class Main{
 
         DataTime data = new DataTimeService();
         Validate validate = new ValidadeUtils();
+        FileUploader uploader = new FileUploader();
 
         Logger logger = createLogger(data);
         Manager taskManager = new TaskManager(data, logger, validate);
 
         try{
+
+            taskManager.uploadTaskFromData(uploader.taskUploaderFromText());
             TaskPrinter printer = new TaskPrinter();
 
             taskManager.createTask("Testando",
@@ -31,10 +38,6 @@ public class Main{
                     Priority.ALTO,
                     "Trabalho",
                     12, 9, 2025);
-
-            printer.printTasks(taskManager.getAllTasks());
-
-            taskManager.completeTask("Testando");
 
         } finally {
             logger.close();

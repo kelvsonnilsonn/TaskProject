@@ -13,12 +13,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TaskManager implements Manager {
 
-    private final List<Task> taskList = new ArrayList<>();
-    private final List<Task> completedTasks = new ArrayList<>();
+    private List<Task> taskList = new ArrayList<>();
+    private List<Task> completedTasks = new ArrayList<>();
 
     private final DataTime dataService;
     private final Logger logger;
@@ -114,6 +115,11 @@ public class TaskManager implements Manager {
     @Override
     public List<Task> getTasksFilteredByPriority(Priority priority){
         return filterByPriority(priority);
+    }
+
+    @Override
+    public void uploadTaskFromData(List<Task> uploadedTask){
+        this.taskList = uploadedTask;
     }
 
     private List<Task> filterByPriority(Priority priority){
