@@ -14,7 +14,7 @@ import Util.FileUtils.FileUploader;
 import Util.LogUtils.NullLogger;
 import Util.LogUtils.TaskLogger;
 
-import model.Priority;
+import Enums.Priority;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;

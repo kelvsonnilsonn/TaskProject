@@ -1,5 +1,3 @@
-Aqui estão 10 ideias criativas para expandir seu sistema de lista de tarefas, mantendo a estrutura atual e respeitando os princípios SOLID:
-
 1. Prioridade de Tarefas
 Adicionar níveis de prioridade (Baixa/Média/Alta) às tarefas. // feito
 
@@ -11,15 +9,13 @@ Classificar tarefas em categorias (ex.: "Trabalho", "Estudo", "Pessoal"). // fei
 Implementar busca por tag. // feito
 
 3. Prazos e Lembretes
-Adicionar data/hora limite para conclusão.
-
-Criar um serviço de alerta (ReminderService) que notifica tarefas próximas do prazo.
+Adicionar data/hora limite para conclusão. // feito
 
 4. Histórico de Modificações
-Registrar quando uma tarefa foi criada, editada ou concluída (usando um AuditLog).
+Registrar quando uma tarefa foi criada, editada ou concluída (usando um AuditLog). // feito
 
 5. Exportação/Importação
-Salvar tarefas em arquivo (JSON, CSV) ou carregar de uma fonte externa.
+Salvar tarefas em arquivo (JSON, CSV) ou carregar de uma fonte externa. // feito
 
 6. Compartilhamento de Tarefas
 Simular envio de tarefas por e-mail (usando uma interface NotificationService).
@@ -35,3 +31,5 @@ Filtrar por intervalo de datas, status, ou palavras-chave.
 
 10. Undo/Redo
 Implementar desfazer/refazer ações (usando o padrão Command).
+
+Criar um serviço de alerta (ReminderService) que notifica tarefas próximas do prazo.

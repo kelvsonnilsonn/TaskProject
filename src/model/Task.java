@@ -1,5 +1,7 @@
 package model;
 
+import Enums.Priority;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

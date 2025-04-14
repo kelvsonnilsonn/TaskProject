@@ -5,7 +5,7 @@ import Interfaces.Logger;
 import Interfaces.Manager;
 import Interfaces.Validate;
 
-import model.Priority;
+import Enums.Priority;
 import model.Task;
 
 import java.time.LocalDate;
@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TaskManager implements Manager {
@@ -124,6 +123,14 @@ public class TaskManager implements Manager {
         this.taskList = uploadedTask;
     }
 
+    @Override
+    public Task findTaskByName(String name){
+        return taskList.stream()
+                .filter(task -> task.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
     private List<Task> filterByPriority(Priority priority){
         return taskList.stream()
                 .filter(task -> task.getPriority() == priority)
@@ -134,13 +141,6 @@ public class TaskManager implements Manager {
         return taskList.stream()
                 .filter(task -> task.getTag().equals(tag))
                 .collect(Collectors.toList());
-    }
-
-    private Task findTaskByName(String name){
-        return taskList.stream()
-                .filter(task -> task.getName().equals(name))
-                .findFirst()
-                .orElse(null);
     }
 
     private List<Task> getTasksOrderedByPriority(){

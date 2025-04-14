@@ -1,4 +1,6 @@
-package model;
+package Services;
+
+import Enums.Priority;
 
 public class PriorityManager {
     public static Priority getPriorityType(String type){

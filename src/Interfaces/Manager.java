@@ -1,9 +1,8 @@
 package Interfaces;
 
-import model.Priority;
+import Enums.Priority;
 import model.Task;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface Manager {
@@ -15,6 +14,7 @@ public interface Manager {
     void addTagToTask(String task, String newTag);
     void uploadTaskFromData(List<Task> uploadedTask);
 
+    Task findTaskByName(String name);
     List<Task> getAllTasks();
     List<Task> getAllTasksByTag(String tag);
     List<Task> getTasksFilteredByPriority(Priority priority);
