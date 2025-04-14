@@ -35,14 +35,22 @@ public class Main{
             taskManager.uploadTaskFromData(uploader.taskUploaderFromText());
             TaskPrinter printer = new TaskPrinter();
 
-            taskManager.createTask("Testando",
-                    "Tem que testar",
-                    Priority.ALTO,
-                    "Trabalho",
-                    12, 9, 2025,
-                    "CREATE");
+            for(int i = 12; i<25; i++){
+                String name = "Name" + i;
+                taskManager.createTask(name,
+                        "Tem que testar",
+                        Priority.ALTO,
+                        "Trabalho",
+                        i, 9, 2025,
+                        "CREATE");
 
-            printer.printTasks(taskManager.getAllTasks());
+            }
+
+            printer.printTasks(taskManager.getTaskFilteredByIntervals(
+                    data.createValidDeadLine(12, 9, 2025),
+                    data.createValidDeadLine(16, 9, 2025))
+            );
+
         } finally {
             logger.close();
         }

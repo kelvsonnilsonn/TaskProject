@@ -36,6 +36,9 @@ public class Task {
 
     public boolean isOverDue() { return LocalDate.now().isAfter(deadline); } // checa se data atrasou!
 
+    public boolean isAfterDue(LocalDate date) { return deadline.isAfter(date); }
+    public boolean isBeforeDue(LocalDate date) { return deadline.isBefore(date); }
+
     public Priority getPriority() { return this.priority; }
 
     public void addTaskTag(String tagToAdd) { this.tag.add(tagToAdd); }

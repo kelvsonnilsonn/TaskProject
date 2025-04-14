@@ -8,9 +8,7 @@ import java.util.List;
 public class TaskPrinter implements Printer {
     @Override
     public void printTasks(List<Task> taskList){
-        for(Task t : taskList){
-            System.out.println(t);
-        }
+        taskList.forEach(System.out::println);
     }
 }
 

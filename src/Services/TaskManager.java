@@ -119,9 +119,7 @@ public class TaskManager implements Manager {
     }
 
     @Override
-    public void uploadTaskFromData(List<Task> uploadedTask){
-        this.taskList = uploadedTask;
-    }
+    public List<Task> getTaskFilteredByIntervals(LocalDate start, LocalDate end){ return getTasksOrderedByDeadline(start, end); }
 
     @Override
     public Task findTaskByName(String name){
@@ -130,6 +128,12 @@ public class TaskManager implements Manager {
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public void uploadTaskFromData(List<Task> uploadedTask){
+        this.taskList = uploadedTask;
+    }
+
 
     private List<Task> filterByPriority(Priority priority){
         return taskList.stream()
@@ -140,6 +144,12 @@ public class TaskManager implements Manager {
     private List<Task> getTasksOrderedByTag(String tag){
         return taskList.stream()
                 .filter(task -> task.getTag().equals(tag))
+                .collect(Collectors.toList());
+    }
+
+    private List<Task> getTasksOrderedByDeadline(LocalDate start, LocalDate end){
+        return taskList.stream()
+                .filter(task -> (!task.isBeforeDue(start) && !task.isAfterDue(end)))
                 .collect(Collectors.toList());
     }
 
