@@ -15,7 +15,6 @@ import Util.LogUtils.NullLogger;
 import Util.LogUtils.TaskLogger;
 
 import Enums.Priority;
-import Util.Validate.ValidadeUtils;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -25,10 +24,9 @@ public class Main{
     public static void main(String[] args) {
 
         DataTime data = new DataTimeService();
-        Validate validate = new ValidadeUtils();
 
         Logger logger = createLogger(data);
-        Manager taskManager = new TaskManager(data, logger, validate);
+        Manager taskManager = new TaskManager(data, logger);
         CompleteManager completer = new CompletedTaskManager(logger, taskManager);
         Uploader uploader = new FileUploader(taskManager);
 

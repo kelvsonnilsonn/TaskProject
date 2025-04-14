@@ -3,10 +3,9 @@ package Services;
 import Interfaces.DataTime;
 import Interfaces.Logger;
 import Interfaces.Manager;
-import Interfaces.Validate;
-import Interfaces.CompleteManager;
 
 import Enums.Priority;
+import Util.Validate.ValidateUtils;
 import model.Task;
 
 import java.time.LocalDate;
@@ -22,13 +21,11 @@ public class TaskManager implements Manager {
 
     private final DataTime dataService;
     private final Logger logger;
-    private final Validate validate;
 
 
-    public TaskManager(DataTime dataService, Logger logger, Validate validate){
+    public TaskManager(DataTime dataService, Logger logger){
         this.dataService = dataService;
         this.logger = logger;
-        this.validate = validate;
     }
 
     @Override
@@ -36,8 +33,8 @@ public class TaskManager implements Manager {
                            Priority priority, String tag,
                            int day, int month, int year, String type){  // criar task
 
-        taskName = validate.requireNonEmpty(taskName, "CREATE TASK - NAME");
-        body = validate.requireNonEmpty(body, "CREATE TASK - BODY");
+        taskName = ValidateUtils.requireNonEmpty(taskName, "CREATE TASK - NAME");
+        body = ValidateUtils.requireNonEmpty(body, "CREATE TASK - BODY");
         LocalDate validatedDeadline = dataService.createValidDeadLine(day, month, year);
 
         if(findTaskByName(taskName) != null){
@@ -62,7 +59,7 @@ public class TaskManager implements Manager {
     @Override
     public void deleteTask(String taskName) {
 
-        taskName = validate.requireNonEmpty(taskName, "DELETE TASK - NAME");
+        taskName = ValidateUtils.requireNonEmpty(taskName, "DELETE TASK - NAME");
 
         Task taskToRemove = findTaskByName(taskName);
         if(taskToRemove == null){
@@ -76,8 +73,8 @@ public class TaskManager implements Manager {
     @Override
     public void addTagToTask(String taskName, String newTag){
 
-        taskName = validate.requireNonEmpty(taskName, "TAG - NAME");
-        newTag = validate.requireNonEmpty(newTag, "TAG - TAG");
+        taskName = ValidateUtils.requireNonEmpty(taskName, "TAG - NAME");
+        newTag = ValidateUtils.requireNonEmpty(newTag, "TAG - TAG");
 
         Task alteredTaskTag = findTaskByName(taskName);
         if(alteredTaskTag == null){
