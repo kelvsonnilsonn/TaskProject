@@ -18,7 +18,7 @@ Registrar quando uma tarefa foi criada, editada ou concluída (usando um AuditLo
 Salvar tarefas em arquivo (JSON, CSV) ou carregar de uma fonte externa. // feito
 
 6. Compartilhamento de Tarefas
-Simular envio de tarefas por e-mail (usando uma interface NotificationService).
+Simular envio de tarefas por e-mail (usando uma interface NotificationService). // feito
 
 7. Subtarefas
 Permitir quebrar tarefas complexas em subtarefas (lista aninhada).
@@ -27,7 +27,7 @@ Permitir quebrar tarefas complexas em subtarefas (lista aninhada).
 Gerar relatórios (ex.: "X% de tarefas concluídas na semana").
 
 9. Busca Avançada
-Filtrar por intervalo de datas, status, ou palavras-chave.
+Filtrar por intervalo de datas, status, ou palavras-chave. // feito
 
 10. Undo/Redo
 Implementar desfazer/refazer ações (usando o padrão Command).

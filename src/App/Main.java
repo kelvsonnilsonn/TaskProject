@@ -2,12 +2,12 @@ package App;
 
 import Interfaces.*;
 
+import Services.CompletedTaskManager;
 import Services.TaskManager;
 
 import UI.TaskPrinter;
 
-import Util.*;
-
+import Util.Date.DataTimeService;
 import Util.FileUtils.FileLocations;
 import Util.FileUtils.FileUploader;
 
@@ -15,6 +15,7 @@ import Util.LogUtils.NullLogger;
 import Util.LogUtils.TaskLogger;
 
 import Enums.Priority;
+import Util.Validate.ValidadeUtils;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -28,11 +29,13 @@ public class Main{
 
         Logger logger = createLogger(data);
         Manager taskManager = new TaskManager(data, logger, validate);
+        CompleteManager completer = new CompletedTaskManager(logger, taskManager);
         Uploader uploader = new FileUploader(taskManager);
 
         try{
 
             taskManager.uploadTaskFromData(uploader.taskUploaderFromText());
+
             TaskPrinter printer = new TaskPrinter();
 
             for(int i = 12; i<25; i++){
@@ -50,6 +53,24 @@ public class Main{
                     data.createValidDeadLine(12, 9, 2025),
                     data.createValidDeadLine(16, 9, 2025))
             );
+
+            System.out.println("TESTANDO");
+
+            for(int i = 15; i< 24; i++){
+                String name = "Name" + i;
+                completer.addCompletedTask(taskManager.findTaskByName(name));
+            }
+
+            System.out.println("TESTANDO - PÓS COMPLETAR");
+
+            printer.printTasks(taskManager.getTaskFilteredByIntervals(
+                    data.createValidDeadLine(12, 9, 2025),
+                    data.createValidDeadLine(16, 9, 2025))
+            );
+
+            System.out.println("TESTANDO - TUDO");
+
+            printer.printTasks(taskManager.getAllTasks());
 
         } finally {
             logger.close();

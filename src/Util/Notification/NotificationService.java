@@ -1,4 +1,4 @@
-package Util;
+package Util.Notification;
 
 import Interfaces.Notification;
 import model.Message;

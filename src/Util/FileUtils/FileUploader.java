@@ -49,7 +49,7 @@ public class FileUploader implements Uploader {
                     taskManager.createTask(name, value, priority, tag, day, month, year, "REGEN");
                 } else if (action.equals("DELETED")) {
                     taskManager.deleteTask(name); // não tem como excluir algo que não foi criado antes.
-                } // caso em que task foi concluida (...)
+                }
             }
         } catch (Exception e) {
             System.err.println("Erro ao receber logs da memória: " + e.getMessage());

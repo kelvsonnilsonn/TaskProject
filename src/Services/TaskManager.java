@@ -4,6 +4,7 @@ import Interfaces.DataTime;
 import Interfaces.Logger;
 import Interfaces.Manager;
 import Interfaces.Validate;
+import Interfaces.CompleteManager;
 
 import Enums.Priority;
 import model.Task;
@@ -18,31 +19,16 @@ import java.util.stream.Collectors;
 public class TaskManager implements Manager {
 
     private List<Task> taskList = new ArrayList<>();
-    private List<Task> completedTasks = new ArrayList<>();
 
     private final DataTime dataService;
     private final Logger logger;
     private final Validate validate;
 
+
     public TaskManager(DataTime dataService, Logger logger, Validate validate){
         this.dataService = dataService;
         this.logger = logger;
         this.validate = validate;
-    }
-
-    @Override
-    public void completeTask(String taskName){
-        taskName = validate.requireNonEmpty(taskName, "COMPLETE TASK - NAME");
-
-        Task completedTask = findTaskByName(taskName);
-        if(completedTask == null){
-            throw new IllegalArgumentException("Tarefa não encontrada.");
-        } else {
-            completedTask.setStatus(!completedTask.isOverDue() ? "Feita." : "Feita com atraso.");
-            taskList.remove(completedTask);
-            completedTasks.add(completedTask);
-            logger.completedTaskLog(completedTask);
-        }
     }
 
     @Override
@@ -108,6 +94,8 @@ public class TaskManager implements Manager {
         return getTasksOrderedByPriority();
     }
 
+    // Métodos de filtro:
+
     @Override
     public List<Task> getAllTasksByTag(String tag){
         return getTasksOrderedByTag(tag);
@@ -122,6 +110,11 @@ public class TaskManager implements Manager {
     public List<Task> getTaskFilteredByIntervals(LocalDate start, LocalDate end){ return getTasksOrderedByDeadline(start, end); }
 
     @Override
+    public List<Task> getTaskFilteredByStatus(String status){ return getTasksOrderedByStatus(status); }
+
+    // Métodos auxiliares:
+
+    @Override
     public Task findTaskByName(String name){
         return taskList.stream()
                 .filter(task -> task.getName().equals(name))
@@ -134,10 +127,17 @@ public class TaskManager implements Manager {
         this.taskList = uploadedTask;
     }
 
+    // Métodos privados:
 
     private List<Task> filterByPriority(Priority priority){
         return taskList.stream()
                 .filter(task -> task.getPriority() == priority)
+                .collect(Collectors.toList());
+    }
+
+    private List<Task> getTasksOrderedByStatus(String status){
+        return taskList.stream()
+                .filter(task -> task.getStatus().equals(status))
                 .collect(Collectors.toList());
     }
 
