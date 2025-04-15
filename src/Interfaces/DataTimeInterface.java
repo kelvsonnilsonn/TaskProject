@@ -1,9 +1,8 @@
 package Interfaces;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-public interface DataTime {
+public interface DataTimeInterface {
     String getTimeNow();
     LocalDate createValidDeadLine(int day, int month, int year);
 }

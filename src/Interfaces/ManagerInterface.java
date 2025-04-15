@@ -6,7 +6,7 @@ import model.Task;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface Manager {
+public interface ManagerInterface {
     void createTask(String taskName, String data,
                     Priority priority, String tag,
                     int day, int month, int year, String type);

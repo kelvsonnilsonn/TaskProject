@@ -15,6 +15,7 @@ import Util.LogUtils.NullLogger;
 import Util.LogUtils.TaskLogger;
 
 import Enums.Priority;
+import Util.ReminderService;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -23,59 +24,28 @@ public class Main{
 
     public static void main(String[] args) {
 
-        DataTime data = new DataTimeService();
-
-        Logger logger = createLogger(data);
-        Manager taskManager = new TaskManager(data, logger);
-        CompleteManager completer = new CompletedTaskManager(logger, taskManager);
-        Uploader uploader = new FileUploader(taskManager);
+        DataTimeInterface data = new DataTimeService();
+        LoggerInterface logger = createLogger(data);
+        ManagerInterface taskManager = new TaskManager(data, logger);
+        CompleteManagerInterface completer = new CompletedTaskManager(logger, taskManager);
+        UploaderInterface uploader = new FileUploader(taskManager);
 
         try{
 
-            taskManager.uploadTaskFromData(uploader.taskUploaderFromText());
-
             TaskPrinter printer = new TaskPrinter();
+            ReminderInterface reminder = new ReminderService(printer);
 
-            for(int i = 12; i<25; i++){
-                String name = "Name" + i;
-                taskManager.createTask(name,
-                        "Tem que testar",
-                        Priority.ALTO,
-                        "Trabalho",
-                        i, 9, 2025,
-                        "CREATE");
+            taskManager.uploadTaskFromData(uploader.taskUploaderFromText());
+            System.out.println("Tarefas carregadas: " + taskManager.getAllTasks().size());
 
-            }
-
-            printer.printTasks(taskManager.getTaskFilteredByIntervals(
-                    data.createValidDeadLine(12, 9, 2025),
-                    data.createValidDeadLine(16, 9, 2025))
-            );
-
-            System.out.println("TESTANDO");
-
-            for(int i = 15; i< 24; i++){
-                String name = "Name" + i;
-                completer.addCompletedTask(taskManager.findTaskByName(name));
-            }
-
-            System.out.println("TESTANDO - PÓS COMPLETAR");
-
-            printer.printTasks(taskManager.getTaskFilteredByIntervals(
-                    data.createValidDeadLine(12, 9, 2025),
-                    data.createValidDeadLine(16, 9, 2025))
-            );
-
-            System.out.println("TESTANDO - TUDO");
-
-            printer.printTasks(taskManager.getAllTasks());
+            reminder.reminderTasks(taskManager.getAllTasks());
 
         } finally {
             logger.close();
         }
     }
 
-    private static Logger createLogger(DataTime timer){
+    private static LoggerInterface createLogger(DataTimeInterface timer){
         try{
             PrintWriter writer = new PrintWriter(
                     new FileWriter(FileLocations.TASK_LOG, true), true

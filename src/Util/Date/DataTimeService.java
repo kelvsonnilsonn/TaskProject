@@ -1,12 +1,12 @@
 package Util.Date;
 
-import Interfaces.DataTime;
+import Interfaces.DataTimeInterface;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DataTimeService implements DataTime {
+public class DataTimeService implements DataTimeInterface {
 
     @Override
     public String getTimeNow(){

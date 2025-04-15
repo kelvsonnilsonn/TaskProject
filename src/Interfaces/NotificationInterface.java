@@ -2,6 +2,6 @@ package Interfaces;
 
 import model.Message;
 
-public interface Notification {
+public interface NotificationInterface {
     void sendEmail(Message message);
 }

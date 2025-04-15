@@ -34,8 +34,9 @@ public class Task {
     }
     public String getStatus() { return this.status; }
 
-    public boolean isOverDue() { return LocalDate.now().isAfter(deadline); } // checa se data atrasou!
+    public LocalDate getDeadline() { return this.deadline; }
 
+    public boolean isOverDue() { return LocalDate.now().isAfter(deadline); } // checa se data atrasou!
     public boolean isAfterDue(LocalDate date) { return deadline.isAfter(date); }
     public boolean isBeforeDue(LocalDate date) { return deadline.isBefore(date); }
 

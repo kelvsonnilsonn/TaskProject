@@ -1,21 +1,21 @@
 package Services;
 
-import Interfaces.CompleteManager;
-import Interfaces.Logger;
-import Interfaces.Manager;
+import Interfaces.CompleteManagerInterface;
+import Interfaces.LoggerInterface;
+import Interfaces.ManagerInterface;
 
 import model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompletedTaskManager implements CompleteManager {
+public class CompletedTaskManager implements CompleteManagerInterface {
     private List<Task> completedTasks = new ArrayList<>();
 
-    private Logger logger;
-    private Manager taskManager;
+    private final LoggerInterface logger;
+    private final ManagerInterface taskManager;
 
-    public CompletedTaskManager(Logger logger, Manager taskManager){
+    public CompletedTaskManager(LoggerInterface logger, ManagerInterface taskManager){
         this.logger = logger;
         this.taskManager = taskManager;
     }
@@ -25,6 +25,7 @@ public class CompletedTaskManager implements CompleteManager {
         if(task == null){
             throw new IllegalArgumentException("Tarefa não encontrada ao completar.");
         } else {
+            task.setStatus(!task.isOverDue() ? "Feita" : "Feita com atraso.");
             completedTasks.add(task);
             taskManager.deleteTask(task.getName());
             logger.completedTaskLog(task);

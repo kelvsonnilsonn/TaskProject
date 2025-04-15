@@ -1,19 +1,18 @@
 package Util.LogUtils;
 
-import Interfaces.DataTime;
-import Interfaces.Logger;
+import Interfaces.DataTimeInterface;
+import Interfaces.LoggerInterface;
 
 import java.io.PrintWriter;
 
 import model.Task;
 
-public class TaskLogger implements Logger {
-    private static final String LOG_FILE = "Log.txt";
+public class TaskLogger implements LoggerInterface {
 
     private final PrintWriter writer;
-    private final DataTime timer;
+    private final DataTimeInterface timer;
 
-    public TaskLogger(PrintWriter writer, DataTime timer) {
+    public TaskLogger(PrintWriter writer, DataTimeInterface timer) {
         this.writer = writer;
         this.timer = timer;
     }

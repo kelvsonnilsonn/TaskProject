@@ -1,8 +1,8 @@
 package Services;
 
-import Interfaces.DataTime;
-import Interfaces.Logger;
-import Interfaces.Manager;
+import Interfaces.DataTimeInterface;
+import Interfaces.LoggerInterface;
+import Interfaces.ManagerInterface;
 
 import Enums.Priority;
 import Util.Validate.ValidateUtils;
@@ -15,15 +15,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TaskManager implements Manager {
+public class TaskManager implements ManagerInterface {
 
     private List<Task> taskList = new ArrayList<>();
 
-    private final DataTime dataService;
-    private final Logger logger;
+    private final DataTimeInterface dataService;
+    private final LoggerInterface logger;
 
 
-    public TaskManager(DataTime dataService, Logger logger){
+    public TaskManager(DataTimeInterface dataService, LoggerInterface logger){
         this.dataService = dataService;
         this.logger = logger;
     }

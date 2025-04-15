@@ -1,7 +1,7 @@
 package Util.FileUtils;
 
-import Interfaces.Manager;
-import Interfaces.Uploader;
+import Interfaces.ManagerInterface;
+import Interfaces.UploaderInterface;
 import Services.PriorityManager;
 import model.Task;
 
@@ -14,11 +14,11 @@ import java.nio.file.Paths;
 
 import Enums.Priority;
 
-public class FileUploader implements Uploader {
+public class FileUploader implements UploaderInterface {
 
-    private Manager taskManager;
+    private ManagerInterface taskManager;
 
-    public FileUploader(Manager taskManager){
+    public FileUploader(ManagerInterface taskManager){
         this.taskManager = taskManager;
     }
 
@@ -58,4 +58,10 @@ public class FileUploader implements Uploader {
 
         return taskManager.getAllTasks();
     }
+
+    @Override
+    public List<Task> taskUploaderFromDataBase() {return null;}
+
+    @Override
+    public List<Task> taskUploaderFromJSON() {return null;}
 }

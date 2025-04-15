@@ -1,9 +1,9 @@
 package Util.LogUtils;
 
-import Interfaces.Logger;
+import Interfaces.LoggerInterface;
 import model.Task;
 
-public class NullLogger implements Logger {
+public class NullLogger implements LoggerInterface {
     @Override
     public void createdTaskLog(Task task) {}
 
