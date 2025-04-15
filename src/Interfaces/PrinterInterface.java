@@ -6,4 +6,5 @@ import model.Task;
 public interface PrinterInterface {
     void printTasks(List<Task> taskList);
     void printAlertMissingTime(Task task, int days);
+    void printEveryCompletedTaskRate(double percentage);
 }

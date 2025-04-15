@@ -16,7 +16,7 @@ import Enums.Priority;
 
 public class FileUploader implements UploaderInterface {
 
-    private ManagerInterface taskManager;
+    private final ManagerInterface taskManager;
 
     public FileUploader(ManagerInterface taskManager){
         this.taskManager = taskManager;

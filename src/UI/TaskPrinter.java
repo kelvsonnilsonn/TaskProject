@@ -15,5 +15,10 @@ public class TaskPrinter implements PrinterInterface {
     public void printAlertMissingTime(Task task, int days){
         System.out.printf("Tarefa : %s : vence em %d dias. Faça-a\n", task.getName(), days);
     }
+
+    @Override
+    public void printEveryCompletedTaskRate(double percentage){
+        System.out.printf("Durante toda vida, você concluiu %.2f%% da suas tasks.", percentage);
+    }
 }
 

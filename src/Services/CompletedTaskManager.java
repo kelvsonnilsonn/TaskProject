@@ -25,7 +25,7 @@ public class CompletedTaskManager implements CompleteManagerInterface {
         if(task == null){
             throw new IllegalArgumentException("Tarefa não encontrada ao completar.");
         } else {
-            task.setStatus(!task.isOverDue() ? "Feita" : "Feita com atraso.");
+            task.setStatus(!task.isOverDue() ? "Feita antes do prazo" : "Feita com atraso.");
             completedTasks.add(task);
             taskManager.deleteTask(task.getName());
             logger.completedTaskLog(task);
