@@ -47,7 +47,7 @@ public class TaskLogger implements LoggerInterface {
         message.append("[LOG : " + time + "] ").append(" | ")
                 .append(type).append(" | ")
                 .append("Task : " + task.getName()).append(" | ")
-                .append("Objetivo : " + task.getValue()).append(" | ")
+                .append("Objetivo : " + task.getObjective()).append(" | ")
                 .append("Prioridade : " + task.getPriority()).append(" | ")
                 .append("Tag : ").append(String.join(", ", task.getTag())).append(" | ")
                 .append("Status : ").append(task.getStatus());

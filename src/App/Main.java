@@ -48,7 +48,6 @@ public class Main{
 
             completer.addCompletedTask(taskManager.findTaskByName("Name17"));
 
-
         } finally {
             logger.close();
         }
