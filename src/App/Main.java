@@ -46,8 +46,6 @@ public class Main{
 
             reminder.reminderTasks(taskManager.getAllTasks());
 
-            completer.addCompletedTask(taskManager.findTaskByName("Name17"));
-
         } finally {
             logger.close();
         }

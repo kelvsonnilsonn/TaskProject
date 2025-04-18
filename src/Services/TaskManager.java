@@ -58,7 +58,7 @@ public class TaskManager implements ManagerInterface {
     }
 
     @Override
-    public void deleteTask(String taskName) {
+    public void deleteTask(String taskName, String type) {
 
         taskName = ValidateUtils.requireNonEmpty(taskName, "DELETE TASK - NAME");
 
@@ -67,7 +67,9 @@ public class TaskManager implements ManagerInterface {
             throw new IllegalArgumentException("[DELETE TASK - ERROR] Tarefa não encontrada.");
         } else {
             taskList.remove(taskToRemove);
-            logger.deletedTaskLog(taskToRemove);
+            if(!type.equals("REGEN")) {
+                logger.deletedTaskLog(taskToRemove);
+            }
         }
     }
 

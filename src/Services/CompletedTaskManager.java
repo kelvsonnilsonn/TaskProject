@@ -28,7 +28,7 @@ public class CompletedTaskManager implements CompleteManagerInterface {
         } else {
             task.updateStatus(TaskStatus.COMPLETED);
             completedTasks.add(task);
-            taskManager.deleteTask(task.getName());
+            taskManager.deleteTask(task.getName(), "DELETED");
             logger.completedTaskLog(task);
         }
     }

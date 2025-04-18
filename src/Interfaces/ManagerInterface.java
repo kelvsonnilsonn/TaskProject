@@ -10,7 +10,7 @@ public interface ManagerInterface {
     void createTask(String taskName, String data,
                     Priority priority, String tag,
                     int day, int month, int year, String type);
-    void deleteTask(String taskName);
+    void deleteTask(String taskName, String type);
     void addTagToTask(String task, String newTag);
     void uploadTaskFromData(List<Task> uploadedTask);
 

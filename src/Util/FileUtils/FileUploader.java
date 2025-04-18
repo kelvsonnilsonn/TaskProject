@@ -48,7 +48,7 @@ public class FileUploader implements UploaderInterface {
                 if (action.equals("CREATED")) {
                     taskManager.createTask(name, value, priority, tag, day, month, year, "REGEN");
                 } else if (action.equals("DELETED")) {
-                    taskManager.deleteTask(name); // não tem como excluir algo que não foi criado antes.
+                    taskManager.deleteTask(name, "REGEN"); // não tem como excluir algo que não foi criado antes.
                 }
             }
         } catch (Exception e) {
