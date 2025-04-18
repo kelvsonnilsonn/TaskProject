@@ -19,5 +19,7 @@ public class Metrics implements MetricsInterface {
     }
 
     @Override
-    public double getRateCompletedTasksInMonth(){}
+    public double getRateCompletedTasksInMonth(){
+        return 0;
+    }
 }

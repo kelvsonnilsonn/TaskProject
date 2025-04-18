@@ -32,4 +32,4 @@ Filtrar por intervalo de datas, status, ou palavras-chave. // feito
 10. Undo/Redo
 Implementar desfazer/refazer ações (usando o padrão Command).
 
-Criar um serviço de alerta (ReminderService) que notifica tarefas próximas do prazo.
+Criar um serviço de alerta (ReminderService) que notifica tarefas próximas do prazo. // feito

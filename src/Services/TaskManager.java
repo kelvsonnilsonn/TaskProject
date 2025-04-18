@@ -1,5 +1,6 @@
 package Services;
 
+import Enums.TaskStatus;
 import Interfaces.DataTimeInterface;
 import Interfaces.LoggerInterface;
 import Interfaces.ManagerInterface;
@@ -44,7 +45,7 @@ public class TaskManager implements ManagerInterface {
                     body,
                     priority);
 
-            task.setStatus("Pendente");
+            task.updateStatus(TaskStatus.IN_PROGRESS);
             task.addTaskTag(tag);
             task.setDeadLine(validatedDeadline);
 
@@ -134,7 +135,7 @@ public class TaskManager implements ManagerInterface {
 
     private List<Task> getTasksOrderedByStatus(String status){
         return taskList.stream()
-                .filter(task -> task.getStatus().equals(status))
+                .filter(task -> task.getStatusDescription().equals(status))
                 .collect(Collectors.toList());
     }
 

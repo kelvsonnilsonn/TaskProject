@@ -50,7 +50,7 @@ public class TaskLogger implements LoggerInterface {
                 .append("Objetivo : " + task.getObjective()).append(" | ")
                 .append("Prioridade : " + task.getPriority()).append(" | ")
                 .append("Tag : ").append(String.join(", ", task.getTag())).append(" | ")
-                .append("Status : ").append(task.getStatus());
+                .append("Status : ").append(task.getStatusDescription());
         if(!type.equals("COMPLETE")) message.append(" | ").append("Prazo : ").append(task.getDeadlineFormatted());
 
         return message.toString();
